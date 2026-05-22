@@ -16,7 +16,7 @@ Projeto simples desenvolvido com Java, Spring Boot e Maven para gerenciamento de
 src/
  ├── main/
  │   ├── java/
- │   │   └── com/seuprojeto/
+ │   │   └── com/tarefa/
  │   │       ├── controller/
  │   │       ├── service/
  │   │       ├── repository/
