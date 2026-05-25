@@ -16,13 +16,18 @@ public class UsuarioService {
         this.repository = repository;
     }
 
-    // Cria um usuário
+    // Criar usuário
     public Usuario salvar(Usuario usuario) {
+
+        validarUsuario(usuario); // Utiliza o método de validação para conferir se os dados estão certos
+
         return repository.save(usuario);
     }
 
-    // Atualiza = Pega todos os dados e atualiza da forma que preferir
+    // Atualizar usuário
     public Usuario atualizar(Long id, Usuario usuarioAtualizado) {
+
+        validarUsuario(usuarioAtualizado); // Utiliza o método de validação
 
         Usuario usuario = repository.findById(id).orElseThrow();
 
@@ -33,7 +38,7 @@ public class UsuarioService {
         return repository.save(usuario);
     }
 
-    // Listar todos os usuários inseridos
+    // Listar todos
     public List<Usuario> listarTodos() {
         return repository.findAll();
     }
@@ -48,8 +53,39 @@ public class UsuarioService {
         return repository.findByEmail(email);
     }
 
-    // Deletar por ID
+    // Deletar
     public void deletar(Long id) {
         repository.deleteById(id);
+    }
+
+    // Validações
+    public void validarUsuario(Usuario usuario) {
+
+        if (usuario.getNome() == null || usuario.getNome().isBlank()) {
+            throw new RuntimeException("Nome não pode estar vazio");
+        }
+        if (usuario.getNome().length() < 3) {
+            throw new RuntimeException("Nome muito curto");
+        }
+
+        if (usuario.getEmail() == null || usuario.getEmail().isBlank()) {
+            throw new RuntimeException("Email obrigatório");
+        }
+        if (usuario.getEmail().length() > 90 || usuario.getEmail().length() < 15) {
+            throw new RuntimeException("Email inválido");
+        }
+        if (!usuario.getEmail().endsWith("@gmail.com") && !usuario.getEmail().endsWith("@hotmail.com")) {
+            throw new RuntimeException("Email deve ser gmail ou hotmail");
+        }
+
+        if (usuario.getSenha() == null || usuario.getSenha().isBlank()) {
+            throw new RuntimeException("Senha obrigatória");
+        }
+        if (usuario.getSenha().length() < 8) {
+            throw new RuntimeException("Senha deve ter no mínimo 8 caracteres");
+        }
+        if (!usuario.getSenha().matches(".*[A-Z].*")) {
+            throw new RuntimeException("Senha precisa de letra maiúscula");
+        }
     }
 }
