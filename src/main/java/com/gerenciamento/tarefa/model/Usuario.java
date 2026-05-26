@@ -1,5 +1,9 @@
 package com.gerenciamento.tarefa.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +22,14 @@ public class Usuario {
 
     @Column(nullable = false)
     private String senha;
+
+    /* Relacionamento criado: 
+    um usuario pode ter varias tarefas
+    uma tarefa ta atrelada a um usuário
+    */
+    @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference
+    private List<Tarefa> tarefas;
 
     // Construtor criado sem parametro para utilizar de forma sem declarar o objeto
     public Usuario() {}
