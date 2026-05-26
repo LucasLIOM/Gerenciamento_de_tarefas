@@ -14,7 +14,7 @@ public class Tarefa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_tarefa;
 
     private String titulo;
 
@@ -28,8 +28,8 @@ public class Tarefa {
     @JsonBackReference
     private Usuario usuario;
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdTarefa(Long id_tarefa) {
+        this.id_tarefa = id_tarefa;
     }
 
     public void setTitulo(String titulo) {
@@ -40,7 +40,7 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public void setConcluida(boolean concluida) {
+    public void setConcluida(boolean concluida) {   
         this.concluida = concluida;
     }
 
@@ -48,8 +48,8 @@ public class Tarefa {
         this.usuario = usuario;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdTarefa() {
+        return id_tarefa;
     }
 
     public String getTitulo() {

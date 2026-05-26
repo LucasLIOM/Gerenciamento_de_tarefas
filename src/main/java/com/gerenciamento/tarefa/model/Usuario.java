@@ -12,7 +12,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_usuario;
 
     @Column(nullable = false)
     private String nome;
@@ -35,19 +35,19 @@ public class Usuario {
     public Usuario() {}
 
     // Construtor criado com parametro para instanciar
-    public Usuario(Long id, String nome, String email, String senha) {
-        this.id = id;
+    public Usuario(Long id_usuario, String nome, String email, String senha) {
+        this.id_usuario = id_usuario;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdUsuario() {
+        return id_usuario;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdUsuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getNome() {
