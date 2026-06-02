@@ -31,21 +31,33 @@ public class TarefaService {
 
         Tarefa tarefa = repository.findById(id).orElseThrow();
 
+        tarefa.setUsuario(tarefaAtualizada.getUsuario());
         tarefa.setTitulo(tarefaAtualizada.getTitulo());
         tarefa.setDescricao(tarefaAtualizada.getDescricao());
         tarefa.setConcluida(tarefaAtualizada.isConcluida());
-        tarefa.setUsuario(tarefaAtualizada.getUsuario());
+        tarefa.getStatus();
+        
 
         return repository.save(tarefa);
     }
 
     // Listar todas
     public List<Tarefa> listarTodas() {
+        List<Tarefa> listTarefa = repository.findAll();
+
+        if (listTarefa.isEmpty()) {
+            throw new RuntimeException("Nenhuma tarefa foi encontrada.");
+        }
         return repository.findAll();
     }
 
     // Buscar por ID
     public Optional<Tarefa> buscarPorId(Long id) {
+        Optional<Tarefa> idTarefa = repository.findById(id);
+
+        if (idTarefa.isEmpty() || idTarefa == null) {
+            throw new RuntimeException("ID não indentificado.");
+        }
         return repository.findById(id);
     }
 
@@ -74,12 +86,15 @@ public class TarefaService {
         }
     }
 
-    /* 
-    public String trocarStatus(Tarefa tarefa){
+    
 
-        String status = tarefa.isConcluida() ? "Concluída" : "Não concluída";
-
-        return status;
-        
-    } */
+    /*
+     * public String trocarStatus(Tarefa tarefa){
+     * 
+     * String status = tarefa.isConcluida() ? "Concluída" : "Não concluída";
+     * 
+     * return status;
+     * 
+     * }
+     */
 }

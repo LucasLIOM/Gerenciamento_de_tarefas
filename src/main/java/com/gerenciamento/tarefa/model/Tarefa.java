@@ -1,6 +1,7 @@
 package com.gerenciamento.tarefa.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,7 +41,7 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public void setConcluida(boolean concluida) {   
+    public void setConcluida(boolean concluida) {
         this.concluida = concluida;
     }
 
@@ -64,9 +65,13 @@ public class Tarefa {
         return usuario;
     }
 
+    @JsonIgnore
     public boolean isConcluida() {
         return concluida;
     }
 
+    public String getStatus() {
+        return concluida ? "Concluída" : "Não concluída";
+    }
 
 }

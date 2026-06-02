@@ -2,6 +2,7 @@ package com.gerenciamento.tarefa.service;
 
 import com.gerenciamento.tarefa.model.Usuario;
 import com.gerenciamento.tarefa.repository.UsuarioRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,6 +46,12 @@ public class UsuarioService {
 
     // Buscar por ID
     public Optional<Usuario> buscarPorId(Long id) {
+        Optional<Usuario> idUsuario = repository.findById(id);
+
+        if(idUsuario.isEmpty()){
+            throw new RuntimeException("ID do usuário não identificado.");
+        }
+
         return repository.findById(id);
     }
 
